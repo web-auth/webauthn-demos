@@ -20,28 +20,12 @@ use Webauthn\ClientDataCollector\PaymentClientDataCollector;
 use Webauthn\ClientDataCollector\WebauthnAuthenticationCollector;
 use Webauthn\Denormalizer\WebauthnSerializerFactory;
 
-// Two ways to load the lib:
-//   1. Standalone — `composer install` in this directory pulls
-//      web-auth/webauthn-lib >= 5.4 (and friends) into ./vendor.
-//   2. Inside the monorepo — fall back to the framework's own
-//      vendor/autoload.php which exposes the lib via PSR-4 plus all the
-//      transitive Symfony deps the demo needs.
-$autoloads = [
-    __DIR__ . '/../vendor/autoload.php',
-    __DIR__ . '/../../../../vendor/autoload.php',
-];
-$loaded = false;
-foreach ($autoloads as $autoload) {
-    if (is_file($autoload)) {
-        require_once $autoload;
-        $loaded = true;
-        break;
-    }
-}
-if (! $loaded) {
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (! is_file($autoload)) {
     fwrite(\STDERR, "Run `composer install` in docs/examples/spc-demo/ first.\n");
     exit(1);
 }
+require_once $autoload;
 
 /**
  * Wires everything the SPC demo needs:
