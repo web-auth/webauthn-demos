@@ -18,7 +18,7 @@ final readonly class MainEntryPoint implements AuthenticationEntryPointInterface
     ) {
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         $url = $this->router->generate('login');
 

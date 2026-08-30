@@ -29,16 +29,16 @@ final readonly class PublicKeyCredentialUserEntityRepository implements PublicKe
     {
         /** @var User|null $user */
         $user = $this->userRepository->findOneBy([
-            'id' => $userEntity->getId(),
+            'id' => $userEntity->id,
         ]);
         if ($user === null) {
-            $user = new User($userEntity->getId(), $userEntity->getName(), $userEntity->getDisplayName());
+            $user = new User($userEntity->id, $userEntity->name, $userEntity->displayName);
         } else {
-            if ($user->getDisplayName() !== $userEntity->getDisplayName()) {
-                $user->setDisplayName($userEntity->getDisplayName());
+            if ($user->getDisplayName() !== $userEntity->displayName) {
+                $user->setDisplayName($userEntity->displayName);
             }
-            if ($user->getUserIdentifier() !== $userEntity->getName()) {
-                $user->setUsername($userEntity->getName());
+            if ($user->getUserIdentifier() !== $userEntity->name) {
+                $user->setUsername($userEntity->name);
             }
         }
 
@@ -71,8 +71,7 @@ final readonly class PublicKeyCredentialUserEntityRepository implements PublicKe
         return PublicKeyCredentialUserEntity::create(
             $username ?? $randomUserData,
             Ulid::generate(),
-            $displayName ?? $randomUserData,
-            null
+            $displayName ?? $randomUserData
         );
     }
 
@@ -82,11 +81,10 @@ final readonly class PublicKeyCredentialUserEntityRepository implements PublicKe
             return null;
         }
 
-        return new PublicKeyCredentialUserEntity(
+        return PublicKeyCredentialUserEntity::create(
             $user->getUserIdentifier(),
             $user->getId(),
-            $user->getDisplayName(),
-            null
+            $user->getDisplayName()
         );
     }
 }

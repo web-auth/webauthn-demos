@@ -28,7 +28,7 @@ final readonly class LoadMetadataStatementsAndStatusReports implements CacheWarm
         return true;
     }
 
-    public function warmUp(string $cacheDir): array
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         foreach ($this->services as $service) {
             foreach ($service->list() as $aaguid) {
@@ -36,9 +36,9 @@ final readonly class LoadMetadataStatementsAndStatusReports implements CacheWarm
                 $mds = $service->get($aaguid);
                 $this->metadataStatementRepository->save($mds);
 
-                if ($service instanceof FidoAllianceCompliantMetadataService) {
-                    $statusReports = $service->getStatusReports($mds->getAaguid());
-                    $this->statusReportRepository->save($mds->getAaguid(), $statusReports);
+                if ($service instanceof FidoAllianceCompliantMetadataService && $mds->aaguid !== null) {
+                    $statusReports = [...$service->getStatusReports($mds->aaguid)];
+                    $this->statusReportRepository->save($mds->aaguid, $statusReports);
                 }
             }
         }

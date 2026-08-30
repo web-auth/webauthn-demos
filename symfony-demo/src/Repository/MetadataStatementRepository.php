@@ -7,6 +7,7 @@ namespace App\Repository;
 use Psr\Cache\CacheItemPoolInterface;
 use Webauthn\MetadataService\MetadataStatementRepository as MetadataStatementRepositoryInterface;
 use Webauthn\MetadataService\Statement\MetadataStatement;
+use function sprintf;
 
 final readonly class MetadataStatementRepository implements MetadataStatementRepositoryInterface
 {
@@ -27,7 +28,7 @@ final readonly class MetadataStatementRepository implements MetadataStatementRep
 
     public function save(MetadataStatement $mds): void
     {
-        $item = $this->cacheItemPool->getItem(sprintf('mds-%s', $mds->getAaguid()));
+        $item = $this->cacheItemPool->getItem(sprintf('mds-%s', (string) $mds->aaguid));
         $item->set($mds);
         $this->cacheItemPool->save($item);
     }

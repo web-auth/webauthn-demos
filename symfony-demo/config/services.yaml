@@ -24,24 +24,35 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    ### COSE ###
+    # The bundle registers RS1 (RSASSA-PKCS1-v1_5 with SHA-1) so that signatures produced by legacy authenticators
+    # can still be verified, but it builds it without acknowledging that the algorithm is insecure. The library then
+    # emits an E_USER_WARNING, which the dev environment turns into an exception. Overriding the definition keeps the
+    # algorithm available and silences the warning.
+    webauthn.cose.algorithm.RS1:
+        class: Cose\Algorithm\Signature\RSA\RS1
+        arguments:
+            - true
+
     ### MDS ###
     App\Metadata\SingleFileService:
         tags:
             - 'webauthn.mds_service'
         arguments:
             - '%kernel.project_dir%'
+            - '@serializer'
 
     fido_alliance:
         class: Webauthn\MetadataService\Service\FidoAllianceCompliantMetadataService
         tags:
             - 'webauthn.mds_service'
         arguments:
-            - '@Psr\Http\Message\RequestFactoryInterface'
-            - '@Psr\Http\Client\ClientInterface'
+            - '@Symfony\Contracts\HttpClient\HttpClientInterface'
             - 'https://mds.fidoalliance.org/'
             - []
             - '@Webauthn\MetadataService\CertificateChain\PhpCertificateChainValidator'
             - 'https://secure.globalsign.com/cacert/root-r3.crt'
+            - '@serializer'
 
     App\Repository\MetadataStatementRepository:
         arguments:

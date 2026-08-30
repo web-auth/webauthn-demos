@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Repository\PublicKeyCredentialSourceRepository;
+use App\Repository\CredentialRecordRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -17,7 +17,7 @@ class CleanupCommand extends Command
 {
     public function __construct(
         private readonly UserRepository $userRepository,
-        private readonly PublicKeyCredentialSourceRepository $publicKeyCredentialSourceRepository,
+        private readonly CredentialRecordRepository $credentialRecordRepository,
     ) {
         parent::__construct();
     }
@@ -27,7 +27,7 @@ class CleanupCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $users = $this->userRepository->findAllInactive();
         foreach ($users as $user) {
-            $this->publicKeyCredentialSourceRepository->removeAllOfUser($user);
+            $this->credentialRecordRepository->removeAllOfUser($user);
             $this->userRepository->remove($user);
         }
 

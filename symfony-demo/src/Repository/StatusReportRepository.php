@@ -7,6 +7,7 @@ namespace App\Repository;
 use Psr\Cache\CacheItemPoolInterface;
 use Webauthn\MetadataService\Statement\StatusReport;
 use Webauthn\MetadataService\StatusReportRepository as StatusReportRepositoryInterface;
+use function sprintf;
 
 final readonly class StatusReportRepository implements StatusReportRepositoryInterface
 {

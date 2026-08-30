@@ -1,0 +1,3 @@
+symfonycasts_tailwind:
+    # Tailwind CSS 3, which is the version the tailwind.config.js of this application is written for.
+    binary_version: 'v3.4.17'

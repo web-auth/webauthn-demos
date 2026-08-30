@@ -5,6 +5,9 @@
     'dependencies' => 
     array (
     ),
+    'extraFiles' => 
+    array (
+    ),
   ),
   'typed.js' => 
   array (
@@ -12,11 +15,7 @@
     'dependencies' => 
     array (
     ),
-  ),
-  '@simplewebauthn/browser' => 
-  array (
-    'version' => '8.3.4',
-    'dependencies' => 
+    'extraFiles' => 
     array (
     ),
   ),
@@ -26,11 +25,17 @@
     'dependencies' => 
     array (
     ),
+    'extraFiles' => 
+    array (
+    ),
   ),
   '@fontsource-variable/inter/index.min.css' => 
   array (
     'version' => '5.0.15',
     'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
     array (
     ),
   ),
@@ -40,11 +45,39 @@
     'dependencies' => 
     array (
     ),
+    'extraFiles' => 
+    array (
+    ),
   ),
   'material-icons/iconfont/material-icons.min.css' => 
   array (
     'version' => '1.13.12',
     'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  '@simplewebauthn/browser' => 
+  array (
+    'version' => '13.2.2',
+    'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  '@web-auth/webauthn-stimulus' => 
+  array (
+    'version' => '5.3.7',
+    'dependencies' => 
+    array (
+      0 => '@simplewebauthn/browser',
+      1 => '@hotwired/stimulus',
+    ),
+    'extraFiles' => 
     array (
     ),
   ),

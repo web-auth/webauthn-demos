@@ -1,20 +1,21 @@
 # Please see the following page for more information: https://webauthn-doc.spomky-labs.com/the-webauthn-server/the-symfony-way#configuration
 
 webauthn:
-    credential_repository: 'App\Repository\PublicKeyCredentialSourceRepository'
+    credential_repository: 'App\Repository\CredentialRecordRepository'
     user_repository: 'App\Repository\PublicKeyCredentialUserEntityRepository'
     creation_profiles:
         default:
             rp:
-                name: '%env(RELYING_PARTY_NAME)%' # Please adapt the env file with the correct relaying party ID or set null
-                id: '%env(RELYING_PARTY_ID)%' # Please adapt the env file with the correct relaying party ID or set null
+                id: '%env(RELYING_PARTY_ID)%' # Please adapt the env file with the correct relying party ID or set null
 #            challenge_length: 32
 #            timeout: 60000
 #            authenticator_selection_criteria:
 #                user_verification: !php/const Webauthn\AuthenticatorSelectionCriteria::USER_VERIFICATION_REQUIREMENT_PREFERRED
 #                require_resident_key: false
-#            public_key_credential_parameters:
-#                - !php/const Cose\Algorithms::COSE_ALGORITHM_EdDSA
+            public_key_credential_parameters: # Order matters: the authenticator picks the first one it supports
+                - !php/const Cose\Algorithms::COSE_ALGORITHM_EdDSA
+                - !php/const Cose\Algorithms::COSE_ALGORITHM_ES256
+                - !php/const Cose\Algorithms::COSE_ALGORITHM_RS256
             extensions:
                 uvm: true
     request_profiles:

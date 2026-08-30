@@ -1,5 +1,8 @@
 import { startStimulusApp } from '@symfony/stimulus-bundle';
+import { WebauthnController } from '@web-auth/webauthn-stimulus';
 
 const app = startStimulusApp();
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+
+// The WebAuthn controllers are published on npm since v5.3.0 and are registered here,
+// with the identifier that stimulus_controller('@web-auth/webauthn-stimulus') renders.
+app.register('web-auth--webauthn-stimulus', WebauthnController);

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\CredentialRecord;
 use App\Entity\User;
-use App\Repository\PublicKeyCredentialSourceRepository;
+use App\Repository\CredentialRecordRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Webauthn\Bundle\Repository\PublicKeyCredentialUserEntityRepositoryInterface;
-use Webauthn\PublicKeyCredentialSource;
 
 final class AuthenticatorsController extends AbstractController
 {
     public function __construct(
         private readonly PublicKeyCredentialUserEntityRepositoryInterface $keyCredentialUserEntityRepository,
-        private readonly PublicKeyCredentialSourceRepository $keyCredentialSourceRepository
+        private readonly CredentialRecordRepository $credentialRecordRepository,
     ) {
     }
 
@@ -35,13 +35,17 @@ final class AuthenticatorsController extends AbstractController
             throw new AccessDeniedHttpException();
         }
 
-        $credentials = $this->keyCredentialSourceRepository->findAllForUserEntity($userEntity);
-        $credentials = array_map(static function (PublicKeyCredentialSource $source) {
-            $data = $source->jsonSerialize();
-            $data['aaguid'] = $source->getAaguid()->toRfc4122();
-
-            return $data;
-        }, $credentials);
+        $credentials = array_map(
+            static fn (CredentialRecord $credentialRecord): array => [
+                'publicKeyCredentialId' => $credentialRecord->publicKeyCredentialId,
+                'aaguid' => $credentialRecord->aaguid->toRfc4122(),
+                'attestationType' => $credentialRecord->attestationType,
+                'credentialPublicKey' => base64_encode($credentialRecord->credentialPublicKey),
+                'counter' => $credentialRecord->counter,
+                'createdAt' => $credentialRecord->createdAt,
+            ],
+            $this->credentialRecordRepository->findAllForUserEntity($userEntity)
+        );
 
         return $this->render('authenticators/index.html.twig', [
             'credentials' => $credentials,

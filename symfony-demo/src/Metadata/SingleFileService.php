@@ -6,19 +6,22 @@ namespace App\Metadata;
 
 use InvalidArgumentException;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Serializer\SerializerInterface;
 use Webauthn\MetadataService\Service\MetadataService;
 use Webauthn\MetadataService\Statement\MetadataStatement;
 use function array_key_exists;
+use function sprintf;
 
 final class SingleFileService implements MetadataService
 {
     /**
      * @var array<string, MetadataStatement>
      */
-    private array $statements;
+    private array $statements = [];
 
     public function __construct(
-        private readonly string $rootPath
+        private readonly string $rootPath,
+        private readonly SerializerInterface $serializer,
     ) {
     }
 
@@ -49,18 +52,25 @@ final class SingleFileService implements MetadataService
 
     private function loadMDS(): void
     {
+        if ($this->statements !== []) {
+            return;
+        }
+
         foreach ($this->getFilenames() as $filename) {
             $data = file_get_contents($filename);
-            $mds = MetadataStatement::createFromString($data);
+            if ($data === false) {
+                continue;
+            }
+            $mds = $this->serializer->deserialize($data, MetadataStatement::class, 'json');
             if ($mds->aaguid === null) {
                 continue;
             }
-            $this->statements[$mds->getAaguid()] = $mds;
+            $this->statements[$mds->aaguid] = $mds;
         }
     }
 
     /**
-     * @return string[]
+     * @return iterable<string>
      */
     private function getFilenames(): iterable
     {

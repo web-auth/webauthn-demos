@@ -25,7 +25,7 @@ final readonly class CustomStorage implements OptionsStorage
         $this->cacheItemPool->save($cache);
     }
 
-    public function get(): Item
+    public function get(string $challenge): Item
     {
         $cache = $this->cacheItemPool->getItem(self::KEY);
         if (! $cache->isHit()) {

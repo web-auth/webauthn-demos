@@ -56,11 +56,6 @@ class User implements UserInterface
         $this->username = $username;
     }
 
-    public function eraseCredentials(): void
-    {
-        //Not needed in this case because we don't store plain-text passwords
-    }
-
     public function getDisplayName(): string
     {
         return $this->displayName;
