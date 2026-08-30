@@ -111,7 +111,6 @@ function registerOptions(Container $container): void
             PublicKeyCredentialParameters::create('public-key', -257),  // RS256
         ],
         authenticatorSelection: \Webauthn\AuthenticatorSelectionCriteria::create(
-            authenticatorAttachment: 'platform',
             userVerification: 'required',
             residentKey: 'required',
         ),
