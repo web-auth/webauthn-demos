@@ -54,7 +54,7 @@ Ctrl+C stops everything. The two other flavours of the SPC demo need several ori
 
 [symfony-demo](symfony-demo) is a complete Symfony application using the WebAuthn bundle, FrankenPHP, AssetMapper and Tailwind. It targets Symfony 8.1, `web-auth/* ^5.3` and PHP 8.4, and is built and run with Docker, see its own README.
 
-`run-all.sh` points it at a SQLite database created on first run and serves it over plain HTTP, which `localhost` makes a secure context. Its own Docker setup keeps PostgreSQL and HTTPS: set `DATABASE_URL` in `symfony-demo/.env.local` and run `php bin/console doctrine:migrations:migrate` to work against PostgreSQL instead.
+`run-all.sh` points it at a SQLite database created on first run and serves it over plain HTTP, which `localhost` makes a secure context. The origin it accepts comes from `WEBAUTHN_ALLOWED_ORIGIN`, `http://localhost:8110` by default, so change it in `symfony-demo/.env.local` if you serve the application elsewhere. Its own Docker setup keeps PostgreSQL and HTTPS: set `DATABASE_URL` in `symfony-demo/.env.local` and run `php bin/console doctrine:migrations:migrate` to work against PostgreSQL instead.
 
 > [!NOTE]
 > FrankenPHP worker mode is disabled for now: `runtime/frankenphp-symfony` does not support Symfony 8 yet. The application runs in the classic mode until it does.

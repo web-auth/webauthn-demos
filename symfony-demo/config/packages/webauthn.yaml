@@ -1,6 +1,8 @@
 # Please see the following page for more information: https://webauthn-doc.spomky-labs.com/the-webauthn-server/the-symfony-way#configuration
 
 webauthn:
+    allowed_origins:
+        - '%env(WEBAUTHN_ALLOWED_ORIGIN)%'
     credential_repository: 'App\Repository\CredentialRecordRepository'
     user_repository: 'App\Repository\PublicKeyCredentialUserEntityRepository'
     creation_profiles:
