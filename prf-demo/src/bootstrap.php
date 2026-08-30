@@ -50,7 +50,14 @@ final class Container
     {
         $this->relyingPartyId = $_ENV['RP_ID'] ?? 'localhost';
         $this->relyingPartyName = 'PRF Demo Vault';
-        $this->allowedOrigins = explode(',', $_ENV['ALLOWED_ORIGINS'] ?? 'http://localhost:8000');
+        $configuredOrigins = $_ENV['ALLOWED_ORIGINS'] ?? getenv('ALLOWED_ORIGINS');
+        $this->allowedOrigins = explode(',', is_string($configuredOrigins) && $configuredOrigins !== ''
+            ? $configuredOrigins
+            : sprintf(
+                '%s://localhost:%s',
+                ($_SERVER['HTTPS'] ?? '') !== '' ? 'https' : 'http',
+                $_SERVER['SERVER_PORT'] ?? '8000'
+            ));
 
         $this->attestationManager = new AttestationStatementSupportManager();
         $this->attestationManager->add(new NoneAttestationStatementSupport());
