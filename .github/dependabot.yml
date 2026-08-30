@@ -6,14 +6,31 @@ updates:
       interval: "weekly"
       day: "friday"
     versioning-strategy: "increase"
-    open-pull-requests-limit: 50
-    allow:
-      - dependency-type: all
+    open-pull-requests-limit: 5
     labels: [ "dependencies" ]
+    groups:
+      symfony:
+        patterns:
+          - "symfony/*"
+          - "symfonycasts/*"
+      doctrine:
+        patterns:
+          - "doctrine/*"
+      webauthn:
+        patterns:
+          - "web-auth/*"
+          - "web-token/*"
+      others:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 5
     labels: [ "dependencies" ]
+    groups:
+      actions:
+        patterns:
+          - "*"
