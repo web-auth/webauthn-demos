@@ -210,9 +210,9 @@ function vaultOptions(Container $container): void
         // authenticator round-trip. `second` is empty for legacy rows registered
         // before the dual-salt update — fall back to first-salt-only in that case.
         if ($stored['prfSalt2'] !== '') {
-            $prfBuilder->withCredentialInputs($credIdB64Url, $stored['prfSalt'], $stored['prfSalt2']);
+            $prfBuilder->withCredentialInputs($rawId, $stored['prfSalt'], $stored['prfSalt2']);
         } else {
-            $prfBuilder->withCredentialInputs($credIdB64Url, $stored['prfSalt']);
+            $prfBuilder->withCredentialInputs($rawId, $stored['prfSalt']);
         }
         $items[$credIdB64Url] = $stored['items'];
     }
