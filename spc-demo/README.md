@@ -77,7 +77,7 @@ Packagist. Switch it to `^5.4` once that version is released.
 
 Open <http://localhost:8000> in a Chromium-based browser. SPC requires:
 
-- A platform authenticator (Touch ID, Windows Hello, Android device unlock).
+- An authenticator able to create a discoverable credential with user verification: a platform authenticator (Touch ID, Windows Hello, Android device unlock), a security key or a phone.
 - A secure context. `localhost` qualifies; otherwise serve over HTTPS.
 - Chrome 105+ / Edge 105+ / Opera 91+.
 
