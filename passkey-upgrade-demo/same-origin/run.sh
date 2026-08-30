@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin passkey-upgrade-demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/passkey-upgrade-demo/)
+# Usage:  ./same-origin/run.sh   (from passkey-upgrade-demo/)
 
 set -e
 

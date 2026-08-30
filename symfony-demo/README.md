@@ -6,8 +6,8 @@ This project is a simple demo of the Webauthn API and a Symfony application that
 To use it, please install [Git](https://git-scm.com/), [Docker](https://www.docker.com/), [Make](https://en.wikipedia.org/wiki/Make_(software)) and run the following commands:
 
 ```bash
-git clone git@github.com:web-auth/symfony-demo.git
-cd symfony-demo
+git clone git@github.com:web-auth/webauthn-demos.git
+cd webauthn-demos/symfony-demo
 make build
 make up
 make init

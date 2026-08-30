@@ -17,7 +17,7 @@ use Webauthn\Denormalizer\WebauthnSerializerFactory;
 
 $autoload = __DIR__ . '/../vendor/autoload.php';
 if (! is_file($autoload)) {
-    fwrite(\STDERR, "Run `composer install` in docs/examples/prf-demo/ first.\n");
+    fwrite(\STDERR, "Run `composer install` in prf-demo/ first.\n");
     exit(1);
 }
 require_once $autoload;

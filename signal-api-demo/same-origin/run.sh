@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin signal-api-demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/signal-api-demo/)
+# Usage:  ./same-origin/run.sh   (from signal-api-demo/)
 
 set -e
 

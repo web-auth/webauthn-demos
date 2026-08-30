@@ -66,16 +66,14 @@ Three flavours, in order of increasing realism:
 ## Run it
 
 ```bash
-cd docs/examples/spc-demo
+cd spc-demo
 ./same-origin/run.sh
 ```
 
 The script `composer install`s on first run and boots the demo on
-<http://localhost:8000>. The shipped `composer.json` symlinks
-`web-auth/webauthn-framework` from this checkout (`../../..`), so you get
-the not-yet-released SPC code straight from `src/`. To run against a
-published `^5.4` release once one exists, swap the path-repo block for
-the standard packagist `web-auth/webauthn-lib` requirement.
+<http://localhost:8000>. The shipped `composer.json` requires
+`web-auth/webauthn-framework` in its `5.4.x-dev` version, pulled from
+Packagist. Switch it to `^5.4` once that version is released.
 
 Open <http://localhost:8000> in a Chromium-based browser. SPC requires:
 

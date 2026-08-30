@@ -16,7 +16,7 @@ issuer's RP id.
 ## Run it
 
 ```bash
-cd docs/examples/spc-demo
+cd spc-demo
 ./two-origin/run.sh
 ```
 

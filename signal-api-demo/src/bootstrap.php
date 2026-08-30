@@ -17,7 +17,7 @@ use Webauthn\Denormalizer\WebauthnSerializerFactory;
 
 $autoload = __DIR__ . '/../vendor/autoload.php';
 if (! is_file($autoload)) {
-    fwrite(\STDERR, "Run `composer install` in docs/examples/signal-api-demo/ first.\n");
+    fwrite(\STDERR, "Run `composer install` in signal-api-demo/ first.\n");
     exit(1);
 }
 require_once $autoload;

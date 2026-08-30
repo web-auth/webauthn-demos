@@ -22,7 +22,7 @@ use Webauthn\Denormalizer\WebauthnSerializerFactory;
 
 $autoload = __DIR__ . '/../vendor/autoload.php';
 if (! is_file($autoload)) {
-    fwrite(\STDERR, "Run `composer install` in docs/examples/spc-demo/ first.\n");
+    fwrite(\STDERR, "Run `composer install` in spc-demo/ first.\n");
     exit(1);
 }
 require_once $autoload;

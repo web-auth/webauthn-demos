@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin PRF demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/prf-demo/)
+# Usage:  ./same-origin/run.sh   (from prf-demo/)
 
 set -e
 

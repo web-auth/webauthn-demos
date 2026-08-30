@@ -5,7 +5,7 @@
 #   - FakeMerchant backend (relay)    on http://localhost:8003
 #   - FakeMerchant frontend (static)  on http://localhost:8002
 #
-# Usage:  ./three-tier/run.sh   (from docs/examples/spc-demo/)
+# Usage:  ./three-tier/run.sh   (from spc-demo/)
 
 set -e
 

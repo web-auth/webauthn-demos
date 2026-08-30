@@ -55,7 +55,7 @@ changing the display name.
 ## Run it
 
 ```bash
-cd docs/examples/signal-api-demo
+cd signal-api-demo
 ./same-origin/run.sh
 ```
 

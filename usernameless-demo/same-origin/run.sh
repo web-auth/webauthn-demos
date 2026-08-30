@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin usernameless-demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/usernameless-demo/)
+# Usage:  ./same-origin/run.sh   (from usernameless-demo/)
 
 set -e
 

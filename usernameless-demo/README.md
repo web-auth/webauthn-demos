@@ -30,13 +30,14 @@ id plus the user handle the authenticator returns in
 ## Run it
 
 ```bash
-cd docs/examples/usernameless-demo
+cd usernameless-demo
 ./same-origin/run.sh
 ```
 
 The script `composer install`s on first run and boots the demo on
-<http://localhost:8000>. The shipped `composer.json` symlinks
-`web-auth/webauthn-framework` from this checkout (`../../..`).
+<http://localhost:8000>. The shipped `composer.json` requires
+`web-auth/webauthn-framework` in its `5.4.x-dev` version, pulled from
+Packagist. Switch it to `^5.4` once that version is released.
 
 Open <http://localhost:8000> in a browser with passkey support AND
 Conditional UI support:

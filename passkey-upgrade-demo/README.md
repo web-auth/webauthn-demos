@@ -53,7 +53,7 @@ The same applies to passkey delete in a production setting.
 ## Run it
 
 ```bash
-cd docs/examples/passkey-upgrade-demo
+cd passkey-upgrade-demo
 ./same-origin/run.sh
 ```
 

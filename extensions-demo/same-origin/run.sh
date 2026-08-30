@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin extensions demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/extensions-demo/)
+# Usage:  ./same-origin/run.sh   (from extensions-demo/)
 
 set -e
 

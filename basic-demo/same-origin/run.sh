@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin basic-demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/basic-demo/)
+# Usage:  ./same-origin/run.sh   (from basic-demo/)
 
 set -e
 

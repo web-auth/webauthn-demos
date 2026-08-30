@@ -3,7 +3,7 @@
 # Boot the two-origin SPC demo (FakeBank on 8001, FakeMerchant on 8002).
 # Ctrl+C stops both servers cleanly.
 #
-# Usage:  ./two-origin/run.sh   (from docs/examples/spc-demo/)
+# Usage:  ./two-origin/run.sh   (from spc-demo/)
 
 set -e
 

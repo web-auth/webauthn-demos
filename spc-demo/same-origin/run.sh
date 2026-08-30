@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Boot the same-origin SPC demo on http://localhost:8000.
-# Usage:  ./same-origin/run.sh   (from docs/examples/spc-demo/)
+# Usage:  ./same-origin/run.sh   (from spc-demo/)
 
 set -e
 

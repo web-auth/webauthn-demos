@@ -15,7 +15,7 @@ involvement) — the "back channel" you asked about.
 ## Run it
 
 ```bash
-cd docs/examples/spc-demo
+cd spc-demo
 ./three-tier/run.sh
 ```
 
