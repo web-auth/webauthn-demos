@@ -25,16 +25,39 @@ cd basic-demo
 ./same-origin/run.sh
 ```
 
-The script installs the dependencies on first run and serves the demo on <http://localhost:8000>. Requirements: PHP 8.2 or higher with `ext-openssl`, Composer, and a browser with passkey support.
+The script installs the dependencies on first run and serves the demo on <http://localhost:8000>. Set `PORT` to serve it elsewhere. Requirements: PHP 8.2 or higher with `ext-openssl`, Composer, and a browser with passkey support.
 
 These demos require `web-auth/webauthn-framework` in its `5.4.x-dev` version, as they exercise features that are not released yet.
 
+### Running all of them at once
+
+```bash
+./run-all.sh
+```
+
+Every demo gets its own port, so they can be compared side by side. They all share the `localhost` Relying Party ID, which means a passkey registered in one of them is visible to the others.
+
+| URL | Demo |
+| --- | --- |
+| <http://localhost:8101> | basic-demo |
+| <http://localhost:8102> | usernameless-demo |
+| <http://localhost:8103> | passkey-upgrade-demo |
+| <http://localhost:8104> | signal-api-demo |
+| <http://localhost:8105> | extensions-demo |
+| <http://localhost:8106> | prf-demo |
+| <http://localhost:8107> | spc-demo (same-origin flavour) |
+| <http://localhost:8110> | symfony-demo |
+
+Ctrl+C stops everything. The two other flavours of the SPC demo need several origins at once and keep their own launchers, see [spc-demo](spc-demo).
+
 ## Symfony demo application
 
-[symfony-demo](symfony-demo) is a complete Symfony application using the WebAuthn bundle, FrankenPHP, AssetMapper and Tailwind. It is built and run with Docker, see its own README.
+[symfony-demo](symfony-demo) is a complete Symfony application using the WebAuthn bundle, FrankenPHP, AssetMapper and Tailwind. It targets Symfony 8.1, `web-auth/* ^5.3` and PHP 8.4, and is built and run with Docker, see its own README.
+
+It needs a database: set `DATABASE_URL` in `symfony-demo/.env.local` (PostgreSQL by default) and run `php bin/console doctrine:migrations:migrate` before registering a passkey.
 
 > [!NOTE]
-> The application still targets `web-auth/* ^4.1` and Symfony 6.4. Bringing it to the 5.x line is a separate piece of work.
+> FrankenPHP worker mode is disabled for now: `runtime/frankenphp-symfony` does not support Symfony 8 yet. The application runs in the classic mode until it does.
 
 ## Documentation
 

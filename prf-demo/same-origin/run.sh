@@ -12,7 +12,7 @@ if [[ ! -d vendor ]]; then
     composer install --no-interaction
 fi
 
-PORT=8000
+PORT="${PORT:-8000}"
 
 is_busy() { lsof -i ":$1" >/dev/null 2>&1 || ss -ltn 2>/dev/null | grep -q ":$1 "; }
 if is_busy "$PORT"; then
