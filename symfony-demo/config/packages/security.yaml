@@ -1,3 +1,6 @@
+parameters:
+    app.requires_channel: '%app.requires_channel%'
+
 security:
 #    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
@@ -41,12 +44,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/logout,  roles: PUBLIC_ACCESS, requires_channel: 'https' }
-        - { path: ^/login,  roles: PUBLIC_ACCESS, requires_channel: 'https' }
-        - { path: ^/register,  roles: PUBLIC_ACCESS, requires_channel: 'https' }
-        - { path: ^/profile, roles: ROLE_USER, requires_channel: 'https' }
-        #- { path: ^/attestation/options, roles: PUBLIC_ACCESS, requires_channel: 'https' }
-        - { path: ^/,       roles: PUBLIC_ACCESS, requires_channel: 'https' }
+        - { path: ^/logout,  roles: PUBLIC_ACCESS, requires_channel: '%app.requires_channel%' }
+        - { path: ^/login,  roles: PUBLIC_ACCESS, requires_channel: '%app.requires_channel%' }
+        - { path: ^/register,  roles: PUBLIC_ACCESS, requires_channel: '%app.requires_channel%' }
+        - { path: ^/profile, roles: ROLE_USER, requires_channel: '%app.requires_channel%' }
+        #- { path: ^/attestation/options, roles: PUBLIC_ACCESS, requires_channel: '%app.requires_channel%' }
+        - { path: ^/,       roles: PUBLIC_ACCESS, requires_channel: '%app.requires_channel%' }
 
 #when@test:
 #    security:
@@ -60,3 +63,7 @@ security:
 #                cost: 4 # Lowest possible value for bcrypt
 #                time_cost: 3 # Lowest possible value for argon
 #                memory_cost: 10 # Lowest possible value for argon
+
+when@dev:
+    parameters:
+        app.requires_channel: ~

@@ -70,6 +70,14 @@ if [[ ! -f symfony-demo/var/tailwind/app.built.css ]]; then
     echo "Building the Tailwind stylesheet of symfony-demo..."
     (cd symfony-demo && php bin/console tailwind:build --minify)
 fi
+if [[ ! -f symfony-demo/.env.local ]]; then
+    echo "Pointing symfony-demo at a local SQLite database (symfony-demo/.env.local)..."
+    printf 'DATABASE_URL="sqlite:///%%kernel.project_dir%%/var/app.db"\n' > symfony-demo/.env.local
+fi
+if [[ ! -f symfony-demo/var/app.db ]] && grep -q 'sqlite' symfony-demo/.env.local; then
+    echo "Creating the schema of symfony-demo..."
+    (cd symfony-demo && php bin/console doctrine:schema:create --quiet)
+fi
 (cd symfony-demo && mkdir -p var && APP_ENV=dev php -S "localhost:$SYMFONY_PORT" -t public public/index.php \
     >var/server.log 2>&1) &
 PIDS+=("$!")
@@ -86,8 +94,9 @@ for entry in "${DEMOS[@]}"; do
 done
 printf '  http://localhost:%-6s %-22s %s\n' "$SYMFONY_PORT" "symfony-demo" "Full Symfony application"
 echo
-echo "The Symfony application needs a database. It uses the DATABASE_URL of its"
-echo "own .env, so set one in symfony-demo/.env.local before registering a passkey."
+echo "The Symfony application runs on plain HTTP here, which localhost makes a"
+echo "secure context, and on a SQLite database created on first run. Its Docker"
+echo "setup keeps HTTPS and PostgreSQL."
 echo
 echo "Ctrl+C stops everything."
 

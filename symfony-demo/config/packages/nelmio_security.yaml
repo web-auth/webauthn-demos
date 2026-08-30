@@ -64,3 +64,10 @@ nelmio_security:
 #            script-src:
 #                - 'self'
 #                - 'https://ga.jspm.io/npm:es-module-shims@1.8.0/dist/es-module-shims.js'
+
+# The built-in PHP server, which the demos are started with, only speaks plain HTTP.
+# localhost is a secure context anyway, so WebAuthn works there.
+when@dev:
+    nelmio_security:
+        forced_ssl:
+            enabled: false
