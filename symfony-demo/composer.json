@@ -4,9 +4,9 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "doctrine/doctrine-bundle": "^3.2",
+        "doctrine/doctrine-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^4.0",
-        "doctrine/orm": "^3.6",
+        "doctrine/orm": "^3.7",
         "ext-ctype": "*",
         "ext-gmp": "*",
         "ext-iconv": "*",
